@@ -1,0 +1,61 @@
+{
+  "instructions": "Bu 8 görsel assets/images/ugc/ klasöründeki PNG dosyalarını kullanır. AI/temsili görseller oldukları için canlı sitede gerçek müşteri fotoğrafı olarak sunmayın.",
+  "items": [
+    {
+      "id": 1,
+      "published": true,
+      "image": "assets/images/ugc/ugc-01.png",
+      "caption": "Gece rutini 🌙",
+      "name": "Temsili kullanım görseli"
+    },
+    {
+      "id": 2,
+      "published": true,
+      "image": "assets/images/ugc/ugc-02.png",
+      "caption": "Yastık öncesi kullanım",
+      "name": "Temsili kullanım görseli"
+    },
+    {
+      "id": 3,
+      "published": true,
+      "image": "assets/images/ugc/ugc-03.png",
+      "caption": "SOMNEA gece modu",
+      "name": "Temsili kullanım görseli"
+    },
+    {
+      "id": 4,
+      "published": true,
+      "image": "assets/images/ugc/ugc-04.png",
+      "caption": "Akşam rutini",
+      "name": "Temsili kullanım görseli"
+    },
+    {
+      "id": 5,
+      "published": true,
+      "image": "assets/images/ugc/ugc-05.png",
+      "caption": "Yatak odasında SOMNEA",
+      "name": "Temsili kullanım görseli"
+    },
+    {
+      "id": 6,
+      "published": true,
+      "image": "assets/images/ugc/ugc-06.png",
+      "caption": "Uyku öncesi birkaç fıs",
+      "name": "Temsili kullanım görseli"
+    },
+    {
+      "id": 7,
+      "published": true,
+      "image": "assets/images/ugc/ugc-07.png",
+      "caption": "Komodinde SOMNEA",
+      "name": "Temsili kullanım görseli"
+    },
+    {
+      "id": 8,
+      "published": true,
+      "image": "assets/images/ugc/ugc-08.png",
+      "caption": "Gece ritüeli",
+      "name": "Temsili kullanım görseli"
+    }
+  ]
+}

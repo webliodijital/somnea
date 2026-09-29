@@ -1,0 +1,306 @@
+{
+  "instructions": "Review 01-08 görsel yolları PNG olarak düzeltildi. Gerçek müşteri yorumu ve puanı eklediğiniz kaydı published:true yapın. Placeholder yorumları canlıda gerçek müşteri yorumu gibi yayınlamayın.",
+  "reviews": [
+    {
+      "id": 1,
+      "published": false,
+      "name": "Müşteri 01",
+      "city": "İstanbul",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-01.png",
+      "tags": [
+        "Koku",
+        "Gece rutini"
+      ]
+    },
+    {
+      "id": 2,
+      "published": false,
+      "name": "Müşteri 02",
+      "city": "İzmir",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-02.png",
+      "tags": [
+        "Paketleme"
+      ]
+    },
+    {
+      "id": 3,
+      "published": false,
+      "name": "Müşteri 03",
+      "city": "Ankara",
+      "rating": 4,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-03.png",
+      "tags": [
+        "Koku"
+      ]
+    },
+    {
+      "id": 4,
+      "published": false,
+      "name": "Müşteri 04",
+      "city": "Bursa",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-04.png",
+      "tags": [
+        "Tekrar alırım"
+      ]
+    },
+    {
+      "id": 5,
+      "published": false,
+      "name": "Müşteri 05",
+      "city": "Antalya",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-05.png",
+      "tags": [
+        "Gece rutini"
+      ]
+    },
+    {
+      "id": 6,
+      "published": false,
+      "name": "Müşteri 06",
+      "city": "İstanbul",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-06.png",
+      "tags": [
+        "Koku"
+      ]
+    },
+    {
+      "id": 7,
+      "published": false,
+      "name": "Müşteri 07",
+      "city": "İzmir",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-07.png",
+      "tags": [
+        "Paketleme"
+      ]
+    },
+    {
+      "id": 8,
+      "published": false,
+      "name": "Müşteri 08",
+      "city": "Ankara",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-08.png",
+      "tags": [
+        "Gece rutini"
+      ]
+    },
+    {
+      "id": 9,
+      "published": false,
+      "name": "Müşteri 09",
+      "city": "Muğla",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-09.jpg",
+      "tags": [
+        "Koku"
+      ]
+    },
+    {
+      "id": 10,
+      "published": false,
+      "name": "Müşteri 10",
+      "city": "Adana",
+      "rating": 4,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-10.jpg",
+      "tags": [
+        "Koku"
+      ]
+    },
+    {
+      "id": 11,
+      "published": false,
+      "name": "Müşteri 11",
+      "city": "İstanbul",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-11.jpg",
+      "tags": [
+        "Tekrar alırım"
+      ]
+    },
+    {
+      "id": 12,
+      "published": false,
+      "name": "Müşteri 12",
+      "city": "İzmir",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-12.jpg",
+      "tags": [
+        "Paketleme"
+      ]
+    },
+    {
+      "id": 13,
+      "published": false,
+      "name": "Müşteri 13",
+      "city": "Ankara",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-13.jpg",
+      "tags": [
+        "Gece rutini"
+      ]
+    },
+    {
+      "id": 14,
+      "published": false,
+      "name": "Müşteri 14",
+      "city": "Kocaeli",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-14.jpg",
+      "tags": [
+        "Koku"
+      ]
+    },
+    {
+      "id": 15,
+      "published": false,
+      "name": "Müşteri 15",
+      "city": "Samsun",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-15.jpg",
+      "tags": [
+        "Tekrar alırım"
+      ]
+    },
+    {
+      "id": 16,
+      "published": false,
+      "name": "Müşteri 16",
+      "city": "İstanbul",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-16.jpg",
+      "tags": [
+        "Gece rutini"
+      ]
+    },
+    {
+      "id": 17,
+      "published": false,
+      "name": "Müşteri 17",
+      "city": "İzmir",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-17.jpg",
+      "tags": [
+        "Paketleme"
+      ]
+    },
+    {
+      "id": 18,
+      "published": false,
+      "name": "Müşteri 18",
+      "city": "Ankara",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-18.jpg",
+      "tags": [
+        "Koku"
+      ]
+    },
+    {
+      "id": 19,
+      "published": false,
+      "name": "Müşteri 19",
+      "city": "Eskişehir",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-19.jpg",
+      "tags": [
+        "Gece rutini"
+      ]
+    },
+    {
+      "id": 20,
+      "published": false,
+      "name": "Müşteri 20",
+      "city": "Mersin",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-20.jpg",
+      "tags": [
+        "Tekrar alırım"
+      ]
+    },
+    {
+      "id": 21,
+      "published": false,
+      "name": "Müşteri 21",
+      "city": "İstanbul",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-21.jpg",
+      "tags": [
+        "Koku"
+      ]
+    },
+    {
+      "id": 22,
+      "published": false,
+      "name": "Müşteri 22",
+      "city": "İzmir",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-22.jpg",
+      "tags": [
+        "Paketleme"
+      ]
+    },
+    {
+      "id": 23,
+      "published": false,
+      "name": "Müşteri 23",
+      "city": "Ankara",
+      "rating": 4,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-23.jpg",
+      "tags": [
+        "Koku"
+      ]
+    },
+    {
+      "id": 24,
+      "published": false,
+      "name": "Müşteri 24",
+      "city": "Bursa",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-24.jpg",
+      "tags": [
+        "Gece rutini"
+      ]
+    },
+    {
+      "id": 25,
+      "published": false,
+      "name": "Müşteri 25",
+      "city": "Antalya",
+      "rating": 5,
+      "text": "Gerçek müşteri yorumunu buraya ekleyin.",
+      "image": "assets/images/reviews/review-25.jpg",
+      "tags": [
+        "Tekrar alırım"
+      ]
+    }
+  ]
+}
