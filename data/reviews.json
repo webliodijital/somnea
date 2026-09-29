@@ -1,0 +1,114 @@
+{
+  "instructions": "DEMO DOSYASI. Yalnızca tasarım/önizleme için kullanın. Canlı yayında gerçek müşteri yorumlarıyla değiştirin.",
+  "reviews": [
+    {
+      "id": 1,
+      "published": true,
+      "name": "Örnek Yorum 01",
+      "city": "İstanbul",
+      "rating": 5,
+      "text": "[DEMO] Kokusu ağır değil, özellikle yatmadan önce birkaç fıs kullanınca odanın havası çok hoş oluyor.",
+      "image": "assets/images/reviews/review-01.png",
+      "tags": [
+        "Koku",
+        "Gece rutini"
+      ],
+      "demo": true
+    },
+    {
+      "id": 2,
+      "published": true,
+      "name": "Örnek Yorum 02",
+      "city": "İzmir",
+      "rating": 5,
+      "text": "[DEMO] Paketleme çok şık geldi. Komodinimde duruyor, gece rutinime güzel bir detay kattı.",
+      "image": "assets/images/reviews/review-02.png",
+      "tags": [
+        "Paketleme",
+        "Gece rutini"
+      ],
+      "demo": true
+    },
+    {
+      "id": 3,
+      "published": true,
+      "name": "Örnek Yorum 03",
+      "city": "Ankara",
+      "rating": 4,
+      "text": "[DEMO] Koku bana göre biraz hafif ama yapay bir parfüm hissi vermemesi hoşuma gitti.",
+      "image": "assets/images/reviews/review-03.png",
+      "tags": [
+        "Koku"
+      ],
+      "demo": true
+    },
+    {
+      "id": 4,
+      "published": true,
+      "name": "Örnek Yorum 04",
+      "city": "Bursa",
+      "rating": 5,
+      "text": "[DEMO] Yastığa sıkıp birkaç dakika bekliyorum. Geceye geçişte hoş bir ritüel oldu.",
+      "image": "assets/images/reviews/review-04.png",
+      "tags": [
+        "Gece rutini",
+        "Tekrar alırım"
+      ],
+      "demo": true
+    },
+    {
+      "id": 5,
+      "published": true,
+      "name": "Örnek Yorum 05",
+      "city": "Antalya",
+      "rating": 5,
+      "text": "[DEMO] Şişesi beklediğimden daha premium. Kokusu da sakin ve temiz hissettiriyor.",
+      "image": "assets/images/reviews/review-05.png",
+      "tags": [
+        "Paketleme",
+        "Koku"
+      ],
+      "demo": true
+    },
+    {
+      "id": 6,
+      "published": true,
+      "name": "Örnek Yorum 06",
+      "city": "İstanbul",
+      "rating": 5,
+      "text": "[DEMO] Akşamları telefonumu bıraktıktan sonra kullandığım küçük bir gece rutini haline geldi.",
+      "image": "assets/images/reviews/review-06.png",
+      "tags": [
+        "Gece rutini"
+      ],
+      "demo": true
+    },
+    {
+      "id": 7,
+      "published": true,
+      "name": "Örnek Yorum 07",
+      "city": "İzmir",
+      "rating": 5,
+      "text": "[DEMO] Lavanta kokusunun çok baskın olmaması benim için artı oldu. Kullanımı da çok pratik.",
+      "image": "assets/images/reviews/review-07.png",
+      "tags": [
+        "Koku"
+      ],
+      "demo": true
+    },
+    {
+      "id": 8,
+      "published": true,
+      "name": "Örnek Yorum 08",
+      "city": "Ankara",
+      "rating": 5,
+      "text": "[DEMO] İlk olarak tekli aldım. Tasarımı ve kokusu hoşuma gitti, tekrar almayı düşünüyorum.",
+      "image": "assets/images/reviews/review-08.png",
+      "tags": [
+        "Tekrar alırım",
+        "Paketleme"
+      ],
+      "demo": true
+    }
+  ]
+}
