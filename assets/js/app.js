@@ -144,6 +144,17 @@ if (orderForm) {
 
       showOrderMessage('✅ Sipariş kaydınız alındı. En kısa sürede sizinle iletişime geçeceğiz.', 'success');
 
+      // Meta Pixel: yalnızca sipariş Worker/Telegram tarafından başarıyla kabul edilince Lead gönder.
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead', {
+          value: Number(selectedPackage.total),
+          currency: 'TRY',
+          content_name: selectedPackage.label,
+          content_type: 'product',
+          num_items: selected === 'bundle' ? 3 : 1
+        });
+      }
+
       // Formu temizle; seçilen paket bilgisi ekranda korunur.
       orderForm.reset();
       district.innerHTML = '<option value="">İlçe seçin</option>';
