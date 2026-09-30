@@ -32,16 +32,16 @@ async function loadReviews(){
  try{
   const res=await fetch('data/reviews.json'); const data=await res.json();
   let reviews=(data.reviews||[]).filter(x=>x.published===true);
-  if(!reviews.length){qs('#reviewsEmpty').style.display='block';qs('#reviewGrid').style.display='none';return;}
-  qs('#reviewsEmpty').style.display='none';
+  if(!reviews.length){const sec=qs('#reviews'); if(sec) sec.style.display='none'; const chip=qs('#heroReviewChip'); if(chip) chip.hidden=true; return;}
+  if(qs('#reviewsEmpty')) qs('#reviewsEmpty').style.display='none';
   const avg=reviews.reduce((a,b)=>a+b.rating,0)/reviews.length;
-  qs('#ratingNumber').textContent=avg.toFixed(1).replace('.',','); qs('#ratingStars').textContent='★★★★★'; qs('#ratingCount').textContent=`${reviews.length} doğrulanmış müşteri değerlendirmesi`;
-  qs('#heroReviewChip strong').textContent=`${avg.toFixed(1).replace('.',',')}/5 · ${reviews.length} gerçek değerlendirme`;
+  qs('#ratingNumber').textContent=avg.toFixed(1).replace('.',','); qs('#ratingStars').textContent='★★★★★'; qs('#ratingCount').textContent=`${reviews.length} değerlendirme`; const chip=qs('#heroReviewChip'); if(chip){chip.hidden=false;}
+  qs('#heroReviewChip strong').textContent=`${avg.toFixed(1).replace('.',',')}/5 · ${reviews.length} değerlendirme`;
   qs('#ratingBars').innerHTML=[5,4,3,2,1].map(st=>{const c=reviews.filter(r=>r.rating===st).length;const pct=reviews.length?c/reviews.length*100:0;return `<div class="bar-row"><span>${st}★</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><b>${c}</b></div>`}).join('');
   const tags=['Hepsi',...new Set(reviews.flatMap(r=>r.tags||[]))]; qs('#reviewFilters').innerHTML=tags.map((t,i)=>`<button class="filter ${i===0?'active':''}" data-filter="${t}">${t}</button>`).join('');
   function render(filter='Hepsi'){
     const rows=filter==='Hepsi'?reviews:reviews.filter(r=>(r.tags||[]).includes(filter));
-    qs('#reviewGrid').innerHTML=rows.map(r=>`<article class="review-card"><div class="review-head"><div><strong>${r.name}</strong><div style="font-size:11px;color:#7b8493">${r.city||''}</div></div><div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div><p>${r.text}</p>${r.image?`<img class="review-photo" src="${r.image}" alt="Müşteri yorumu" onerror="this.remove()">`:''}<div style="font-size:10px;color:#98a2b3">Gerçek müşteri yorumu</div></article>`).join('');
+    qs('#reviewGrid').innerHTML=rows.map(r=>`<article class="review-card"><div class="review-head"><div><strong>${r.name}</strong><div style="font-size:11px;color:#7b8493">${r.city||''}</div></div><div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</div></div><p>${r.text}</p>${r.image?`<img class="review-photo" src="${r.image}" alt="Müşteri yorumu" onerror="this.remove()">`:''}</article>`).join('');
   }
   render();
   qsa('.filter').forEach(btn=>btn.addEventListener('click',()=>{qsa('.filter').forEach(x=>x.classList.remove('active'));btn.classList.add('active');render(btn.dataset.filter)}));
@@ -51,7 +51,7 @@ loadReviews();
 
 // UGC
 async function loadUGC(){
- try{const res=await fetch('data/ugc.json');const d=await res.json();let items=(d.items||[]).filter(x=>x.published===true);if(!items.length){qs('#ugcEmpty').style.display='block';return;}qs('#ugcEmpty').style.display='none';qs('#ugcGrid').innerHTML=items.map(i=>`<article class="ugc-card"><img src="${i.image}" alt="SOMNEA müşteri fotoğrafı"><div class="ugc-overlay"><strong>${i.caption||''}</strong><small>${i.name||''}</small></div></article>`).join('')}catch(e){console.warn('ugc',e)}}
+ try{const res=await fetch('data/ugc.json');const d=await res.json();let items=(d.items||[]).filter(x=>x.published===true);if(!items.length){const sec=qs('#ugc'); if(sec) sec.style.display='none'; return;} if(qs('#ugcEmpty')) qs('#ugcEmpty').style.display='none';qs('#ugcGrid').innerHTML=items.map(i=>`<article class="ugc-card"><img src="${i.image}" alt="SOMNEA gece ritüeli"><div class="ugc-overlay"><strong>${i.caption||''}</strong>${i.name?`<small>${i.name}</small>`:''}</div></article>`).join('')}catch(e){console.warn('ugc',e)}}
 loadUGC();
 
 // Location hierarchy. Supports user's {province:{district:[neighborhood]}} format and PTT array format.

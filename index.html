@@ -34,7 +34,7 @@
           <span>🌿 Lavanta</span><span>🌱 Melisa</span><span>🌼 Papatya</span><span>📦 Kapıda ödeme</span>
         </div>
         <div class="hero-actions"><a class="btn" href="#packages">Paketi Seç</a><a class="btn btn-ghost" href="#story">Nasıl çalışır?</a></div>
-        <div class="review-chip" id="heroReviewChip"><div class="stars">★★★★★</div><strong>Gerçek müşteri yorumları eklendiğinde puan burada otomatik görünür.</strong></div>
+        <div class="review-chip" id="heroReviewChip" hidden><div class="stars">★★★★★</div><strong></strong></div>
       </div>
       <div class="hero-visual reveal">
         <div class="moon-orb"></div>
@@ -56,9 +56,9 @@
     </section>
 
     <section class="ugc section" id="ugc">
-      <div class="wrap section-head reveal"><div><div class="eyebrow">GERÇEK İNSANLAR · GERÇEK EVLER</div><h2>SOMNEA kullananlardan</h2></div><p>Gerçek müşteri fotoğraflarını <code>assets/images/ugc/</code> klasörüne eklediğinde bu alan otomatik dolacak.</p></div>
+      <div class="wrap section-head reveal"><div><div class="eyebrow">GECE RİTÜELİNDEN KARELER</div><h2>SOMNEA ile gece rutini</h2></div><p>Geceye geçişi küçük bir ritüele dönüştüren SOMNEA anları.</p></div>
       <div class="ugc-grid wrap" id="ugcGrid"></div>
-      <div class="empty-proof wrap" id="ugcEmpty">Gerçek müşteri UGC fotoğraflarınız hazır olduğunda burada dikey kartlar halinde görünecek.</div>
+      <div class="empty-proof wrap" id="ugcEmpty" hidden></div>
     </section>
 
     <section class="ingredients section warm" id="ingredients">
@@ -74,10 +74,10 @@
     <section class="proof-strip"><div class="wrap proof-row"><div><b>100 ml</b><span>Premium cam şişe</span></div><div><b>Kapıda ödeme</b><span>Siparişte kolaylık</span></div><div><b>Yastık & oda</b><span>Pratik kullanım</span></div><div><b>Şeffaf dil</b><span>Abartılı sağlık vaadi yok</span></div></div></section>
 
     <section class="reviews section" id="reviews">
-      <div class="wrap section-head reveal"><div><div class="eyebrow">MÜŞTERİ DENEYİMLERİ</div><h2>Yorumlar burada yaşar.</h2></div><p>25 yorum alanı hazır. Gerçek yorumları <code>data/reviews.json</code> içine ekleyince puan, yıldız dağılımı ve kartlar otomatik hesaplanır.</p></div>
+      <div class="wrap section-head reveal"><div><div class="eyebrow">MÜŞTERİ DENEYİMLERİ</div><h2>SOMNEA deneyimleri</h2></div><p>Ürünü kullanan müşterilerimizin paylaştığı değerlendirmeler.</p></div>
       <div class="wrap reviews-layout">
         <aside class="rating-panel reveal"><div class="rating-number" id="ratingNumber">—</div><div class="stars big" id="ratingStars">☆☆☆☆☆</div><div id="ratingCount">Henüz yayınlanmış yorum yok</div><div class="bars" id="ratingBars"></div></aside>
-        <div class="review-content"><div class="filters" id="reviewFilters"></div><div class="review-grid" id="reviewGrid"></div><div class="empty-proof" id="reviewsEmpty">Gerçek müşteri yorumlarını eklediğinde burada Trendyol tarzı fotoğraflı ve puanlı kartlar görünecek.</div></div>
+        <div class="review-content"><div class="filters" id="reviewFilters"></div><div class="review-grid" id="reviewGrid"></div><div class="empty-proof" id="reviewsEmpty" hidden></div></div>
       </div>
     </section>
 
@@ -96,7 +96,7 @@
       <div class="wrap checkout-shell reveal" id="order">
         <div class="checkout-summary"><div><span>Seçtiğin paket</span><strong id="summaryPackage">3 Adet SOMNEA</strong></div><div><span>Ödenecek</span><strong id="summaryTotal">1.799 TL</strong></div><div class="summary-saving" id="summarySaving">Tekli alıma göre 298 TL avantaj</div></div>
         <div class="checkout-grid">
-          <div class="checkout-info"><div class="eyebrow">KAPIDA ÖDEME</div><h2>Bilgilerini gir,<br>siparişini tamamla.</h2><p>Kart bilgisi gerekmez. Sipariş kaydın Netlify Forms üzerinden güvenli biçimde paneline düşer.</p><div class="checkout-points"><span>✓ İl → ilçe → mahalle dinamik seçim</span><span>✓ Mobil uyumlu hızlı form</span><span>✓ Seçilen paket otomatik eklenir</span></div></div>
+          <div class="checkout-info"><div class="eyebrow">KAPIDA ÖDEME</div><h2>Bilgilerini gir,<br>siparişini tamamla.</h2><p>Kart bilgisi gerekmez. Bilgilerini doldur, kapıda ödeme seçeneğiyle sipariş talebini oluştur.</p><div class="checkout-points"><span>✓ İl → ilçe → mahalle dinamik seçim</span><span>✓ Mobil uyumlu hızlı form</span><span>✓ Seçilen paket otomatik eklenir</span></div></div>
           <form class="order-form" name="somnea-order" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field" id="orderForm">
             <input type="hidden" name="form-name" value="somnea-order">
             <p class="hidden"><label>Bu alanı doldurmayın <input name="bot-field"></label></p>
