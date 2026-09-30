@@ -72,3 +72,95 @@ loadLocations();
 
 // Phone cleanup
 const phone=qs('input[name="telefon"]'); if(phone) phone.addEventListener('input',()=>phone.value=phone.value.replace(/[^0-9+ ]/g,'').slice(0,16));
+
+// Secure order submission -> Cloudflare Worker -> Telegram
+const ORDER_API_URL = 'https://somnea-order-api.webliodijital.workers.dev/';
+const orderForm = qs('#orderForm');
+const orderMessage = qs('#orderMessage');
+
+function showOrderMessage(message, type = 'success') {
+  if (!orderMessage) return;
+  orderMessage.hidden = false;
+  orderMessage.textContent = message;
+  orderMessage.style.marginTop = '14px';
+  orderMessage.style.padding = '14px 16px';
+  orderMessage.style.borderRadius = '12px';
+  orderMessage.style.fontWeight = '700';
+  orderMessage.style.lineHeight = '1.45';
+  orderMessage.style.background = type === 'success' ? '#eef9f1' : '#fff1f1';
+  orderMessage.style.border = type === 'success' ? '1px solid #b9e3c3' : '1px solid #efc2c2';
+  orderMessage.style.color = type === 'success' ? '#17652e' : '#9a2727';
+}
+
+if (orderForm) {
+  orderForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    if (!orderForm.reportValidity()) return;
+
+    const honeypot = orderForm.querySelector('[name="bot-field"]');
+    if (honeypot && honeypot.value.trim()) return;
+
+    const submitButton = orderForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton ? submitButton.textContent : '';
+    const formData = new FormData(orderForm);
+    const selectedPackage = packages[selected];
+
+    const payload = {
+      firstName: String(formData.get('ad') || '').trim(),
+      lastName: String(formData.get('soyad') || '').trim(),
+      phone: String(formData.get('telefon') || '').trim(),
+      province: String(formData.get('il') || '').trim(),
+      district: String(formData.get('ilce') || '').trim(),
+      neighborhood: String(formData.get('mahalle') || '').trim(),
+      address: String(formData.get('adres') || '').trim(),
+      paymentMethod: String(formData.get('odeme') || '').trim(),
+      packageName: selectedPackage.label,
+      packagePrice: `${fmt(selectedPackage.total)} TL`,
+      quantity: selected === 'bundle' ? 3 : 1
+    };
+
+    try {
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Siparişiniz gönderiliyor...';
+      }
+      if (orderMessage) orderMessage.hidden = true;
+
+      const response = await fetch(ORDER_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      let result = {};
+      try {
+        result = await response.json();
+      } catch (_) {}
+
+      if (!response.ok || result.ok !== true) {
+        throw new Error(result.error || 'Sipariş gönderilemedi.');
+      }
+
+      showOrderMessage('✅ Sipariş kaydınız alındı. En kısa sürede sizinle iletişime geçeceğiz.', 'success');
+
+      // Formu temizle; seçilen paket bilgisi ekranda korunur.
+      orderForm.reset();
+      district.innerHTML = '<option value="">İlçe seçin</option>';
+      district.disabled = true;
+      neighborhood.innerHTML = '<option value="">Mahalle seçin</option>';
+      neighborhood.disabled = true;
+      syncPackage(selected, false);
+
+      orderMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (error) {
+      console.error('Order submit error:', error);
+      showOrderMessage('Sipariş şu anda gönderilemedi. Lütfen bilgilerinizi kontrol edip tekrar deneyin.', 'error');
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+    }
+  });
+}
