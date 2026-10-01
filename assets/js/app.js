@@ -30,9 +30,6 @@ qsa('.reveal').forEach((el) => observer.observe(el));
 // social links
 qsa('#instagramLink').forEach((link) => { link.href = cfg.instagramUrl || '#'; });
 qsa('#facebookLink').forEach((link) => { link.href = cfg.facebookUrl || '#'; });
-const whatsappLinks = qsa('[data-whatsapp-link]');
-whatsappLinks.forEach((link) => { link.href = cfg.whatsappUrl || '#'; });
-qsa('[data-phone-display]').forEach((el) => { el.textContent = cfg.phoneDisplay || '0530 877 53 68'; });
 
 function syncPackage(key, scrollToOrder = false) {
   selectedPackageKey = key;
