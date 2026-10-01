@@ -21,9 +21,12 @@
   <script defer src="assets/js/app.js"></script>
 </head>
 <body>
-  <div class="topbar">
-    <span>🚚 Türkiye geneli hızlı gönderim</span><span>💳 Kapıda ödeme</span><span>🌿 Premium gece ritüeli</span><span>💬 Gerçek destek hattı</span>
+  <div class="topbar" aria-label="SOMNEA güven bilgileri">
+  <div class="topbar-track">
+    <div class="topbar-group"><span>🚚 Türkiye geneli hızlı gönderim</span><span>💳 Kapıda ödeme</span><span>🌿 Premium gece ritüeli</span><span>💬 Gerçek destek hattı</span></div>
+    <div class="topbar-group" aria-hidden="true"><span>🚚 Türkiye geneli hızlı gönderim</span><span>💳 Kapıda ödeme</span><span>🌿 Premium gece ritüeli</span><span>💬 Gerçek destek hattı</span></div>
   </div>
+</div>
 
   <header class="hero" id="top">
     <nav class="nav wrap">
@@ -31,7 +34,7 @@
       <div class="nav-actions">
         <a href="about.html">Hakkımızda</a>
         <a href="contact.html">İletişim</a>
-        <a class="nav-whatsapp" data-whatsapp-link href="#" target="_blank" rel="noopener">WhatsApp</a>
+        
       </div>
     </nav>
 
@@ -103,7 +106,7 @@
 
     <section class="section order-section" id="order">
       <div class="wrap section-head reveal center"><div class="eyebrow">KAPIDA ÖDEME SİPARİŞ</div><h2>Seçimini yaptıysan, gerisi kolay.</h2><p>Formu doldur. Sipariş teyidi için sana ulaşalım. Ürün geldiğinde kapıda öde.</p></div>
-      <div class="wrap order-shell reveal"><div class="order-summary"><div><span>Seçilen paket</span><strong id="summaryPackage">3 Adet SOMNEA</strong></div><div><span>Toplam tutar</span><strong id="summaryTotal">1.799 TL</strong></div><div><span>Avantaj</span><strong id="summarySaving">298 TL indirim</strong></div></div><div class="order-grid"><div class="order-copy"><div class="eyebrow">GÜVENLİ SİPARİŞ</div><h3>Bilgilerini bırak, sipariş teyidi için sana ulaşalım.</h3><ul><li>Kapıda ödeme</li><li>Türkiye geneli gönderim</li><li>Gerçek destek hattı: <span data-phone-display>0530 877 53 68</span></li></ul><a class="inline-whatsapp" data-whatsapp-link href="#" target="_blank" rel="noopener">💬 WhatsApp'tan önce soru sor</a></div><form class="order-form" name="somnea-order" id="orderForm"><input type="hidden" name="form-name" value="somnea-order"><p class="hidden"><label>Bu alanı doldurmayın <input name="bot-field"></label></p><input type="hidden" name="paket" id="formPackage" value="3 Adet SOMNEA"><input type="hidden" name="tutar" id="formTotal" value="1799 TL"><div class="form-row"><label>Ad<input type="text" name="ad" required autocomplete="given-name"></label><label>Soyad<input type="text" name="soyad" required autocomplete="family-name"></label></div><label>Telefon numarası<input type="tel" name="telefon" required placeholder="05xx xxx xx xx" autocomplete="tel"></label><div class="form-row"><label>İl<select name="il" id="citySelect" required><option value="">İl seçin</option></select></label><label>İlçe<select name="ilce" id="districtSelect" required disabled><option value="">İlçe seçin</option></select></label></div><label>Açık adres<textarea name="adres" id="addressField" rows="4" required placeholder="Cadde, sokak, bina no, daire no"></textarea></label><label>Ödeme yöntemi<select name="odeme" id="paymentMethod" required><option value="">Ödeme yöntemi seçin</option><option value="Kapıda Nakit">Kapıda Nakit</option></select></label><button class="btn btn-submit" type="submit">🛒 Kapıda ödeme ile sipariş ver</button><div id="orderMessage" hidden></div></form></div></div>
+      <div class="wrap order-shell reveal"><div class="order-summary"><div><span>Seçilen paket</span><strong id="summaryPackage">3 Adet SOMNEA</strong></div><div><span>Toplam tutar</span><strong id="summaryTotal">1.799 TL</strong></div><div><span>Avantaj</span><strong id="summarySaving">298 TL indirim</strong></div><a class="change-package" href="#packages">↺ Paket seçimini yenile</a></div><div class="order-grid"><div class="order-copy"><div class="eyebrow">GÜVENLİ SİPARİŞ</div><h3>Bilgilerini bırak, sipariş teyidi için sana ulaşalım.</h3><ul><li>Kapıda ödeme</li><li>Türkiye geneli gönderim</li><li>Gerçek destek hattı: <span data-phone-display>0530 877 53 68</span></li></ul><a class="inline-whatsapp" data-whatsapp-link href="#" target="_blank" rel="noopener">💬 WhatsApp'tan önce soru sor</a></div><form class="order-form" name="somnea-order" id="orderForm"><input type="hidden" name="form-name" value="somnea-order"><p class="hidden"><label>Bu alanı doldurmayın <input name="bot-field"></label></p><input type="hidden" name="paket" id="formPackage" value="3 Adet SOMNEA"><input type="hidden" name="tutar" id="formTotal" value="1799 TL"><div class="form-row"><label>Ad<input type="text" name="ad" required autocomplete="given-name"></label><label>Soyad<input type="text" name="soyad" required autocomplete="family-name"></label></div><label>Telefon numarası<input type="tel" name="telefon" required placeholder="05xx xxx xx xx" autocomplete="tel"></label><div class="form-row"><label>İl<select name="il" id="citySelect" required><option value="">İl seçin</option></select></label><label>İlçe<select name="ilce" id="districtSelect" required disabled><option value="">İlçe seçin</option></select></label></div><label>Açık adres<textarea name="adres" id="addressField" rows="4" required placeholder="Cadde, sokak, bina no, daire no"></textarea></label><label>Ödeme yöntemi<select name="odeme" id="paymentMethod" required><option value="">Ödeme yöntemi seçin</option><option value="Kapıda Nakit">Kapıda Nakit</option></select></label><button class="btn btn-submit" type="submit">🛒 Kapıda ödeme ile sipariş ver</button><div id="orderMessage" hidden></div></form></div></div>
     </section>
 
     <section class="section contact-strip">
@@ -111,10 +114,24 @@
     </section>
   </main>
 
-  <footer><div class="wrap footer-grid"><div><a class="brand footer-brand" href="#top"><span class="brand-mark">☾</span>SOMNEA</a><p>Geceyi daha özenli kapatmak için tasarlanan premium ritüeller.</p></div><div><strong>Keşfet</strong><a href="#packages">Paketler</a><a href="#reviews">Yorumlar</a><a href="about.html">Hakkımızda</a></div><div><strong>Ulaş</strong><a href="contact.html">İletişim</a><a id="instagramLink" href="#" target="_blank" rel="noopener">Instagram</a><a id="facebookLink" href="#" target="_blank" rel="noopener">Facebook</a></div></div></footer>
+  <footer class="site-footer">
+  <div class="wrap footer-main">
+    <div class="footer-brand-block">
+      <a class="brand footer-brand" href="index.html"><span class="brand-mark">☾</span>SOMNEA</a>
+      <p>Geceyi daha özenli kapatmak için tasarlanan premium ritüeller.</p>
+      <div class="footer-trust"><span>💳 Kapıda ödeme</span><span>🚚 Türkiye geneli gönderim</span><span>💬 Gerçek destek</span></div>
+    </div>
+    <div class="footer-col"><strong>Keşfet</strong><a href="index.html#packages">Paketler</a><a href="index.html#reviews">Yorumlar</a><a href="index.html#product-info">Ürünü Tanı</a><a href="index.html#order">Sipariş Ver</a></div>
+    <div class="footer-col"><strong>SOMNEA</strong><a href="about.html">Hakkımızda</a><a href="contact.html">İletişim</a><a id="instagramLink" href="#" target="_blank" rel="noopener">Instagram</a><a id="facebookLink" href="#" target="_blank" rel="noopener">Facebook</a></div>
+    <div class="footer-col footer-contact"><strong>İletişim</strong><a data-whatsapp-link href="#" target="_blank" rel="noopener">WhatsApp: 0530 877 53 68</a><span>Hizmet alanı: Türkiye geneli</span><span>Online satış & destek</span></div>
+  </div>
+  <div class="wrap footer-bottom"><span>© 2026 SOMNEA. Tüm hakları saklıdır.</span><span>Bu sitedeki bilgiler tıbbi tavsiye değildir.</span></div>
+</footer>
 
   <a class="sticky-order" href="#order"><div><small id="stickyPackage">3’lü paket</small><strong id="stickyPrice">1.799 TL</strong></div><span>Sipariş Ver</span></a>
-  <a class="whatsapp-float" data-whatsapp-link href="#" target="_blank" rel="noopener" aria-label="WhatsApp'tan ulaş">💬</a>
+  <a class="whatsapp-float" data-whatsapp-link href="#" target="_blank" rel="noopener" aria-label="WhatsApp'tan ulaş">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.5 5.9L0 24l6.4-1.7c1.7.9 3.7 1.4 5.7 1.4h.1c6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.3-6.1-3.6-8.3ZM12.2 21.7h-.1c-1.8 0-3.5-.5-5-1.3l-.4-.2-3.8 1 1-3.7-.2-.4a9.7 9.7 0 0 1-1.5-5.2c0-5.5 4.5-9.9 9.9-9.9 2.7 0 5.1 1 7 2.9a9.8 9.8 0 0 1 2.9 7c0 5.4-4.4 9.8-9.8 9.8Zm5.4-7.4c-.3-.1-1.8-.9-2.1-1-.3-.1-.5-.1-.7.2-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.2-1.2 2.9s1.2 3.3 1.4 3.5c.2.2 2.4 3.7 5.8 5.2.8.4 1.5.6 2 .7.8.3 1.6.2 2.2.1.7-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.3Z"/></svg>
+</a>
   <div class="lightbox" id="imageLightbox" hidden><button class="lightbox-close" type="button" id="lightboxClose">×</button><img id="lightboxImage" src="" alt="Yorum görseli"></div>
   <div class="success-modal" id="successModal" hidden><div class="success-card"><div class="success-icon">✓</div><h3 id="successTitle">Tebrikler!</h3><p id="successText">Siparişiniz alındı. En kısa sürede size ulaşılıp sipariş teyidiniz yapılacaktır.</p><button class="btn" type="button" id="successClose">Tamam</button></div></div>
 </body>

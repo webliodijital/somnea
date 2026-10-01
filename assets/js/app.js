@@ -2,6 +2,9 @@ const cfg = window.SOMNEA_CONFIG || {};
 const qs = (s, root = document) => root.querySelector(s);
 const qsa = (s, root = document) => [...root.querySelectorAll(s)];
 const fmt = (n) => new Intl.NumberFormat('tr-TR').format(n);
+function displayInitials(name = '') {
+  return name.trim().split(/\s+/).filter(Boolean).map(part => `${part.charAt(0).toLocaleUpperCase('tr-TR')}.`).join(' ');
+}
 
 const packages = {
   single: { label: '1 Adet SOMNEA', short: '1’li paket', total: cfg.prices?.single || 699, old: 699, saving: 0, quantity: 1 },
@@ -25,10 +28,8 @@ const observer = new IntersectionObserver((entries) => {
 qsa('.reveal').forEach((el) => observer.observe(el));
 
 // social links
-const instagramLink = qs('#instagramLink');
-const facebookLink = qs('#facebookLink');
-if (instagramLink) instagramLink.href = cfg.instagramUrl || '#';
-if (facebookLink) facebookLink.href = cfg.facebookUrl || '#';
+qsa('#instagramLink').forEach((link) => { link.href = cfg.instagramUrl || '#'; });
+qsa('#facebookLink').forEach((link) => { link.href = cfg.facebookUrl || '#'; });
 const whatsappLinks = qsa('[data-whatsapp-link]');
 whatsappLinks.forEach((link) => { link.href = cfg.whatsappUrl || '#'; });
 qsa('[data-phone-display]').forEach((el) => { el.textContent = cfg.phoneDisplay || '0530 877 53 68'; });
@@ -128,9 +129,8 @@ function renderReviews(reviews) {
   const photoReviews = reviews.filter((r) => r.image).slice(0, 6);
   if (thumbStrip) {
     thumbStrip.innerHTML = photoReviews.map((r) => `
-      <button class="review-thumb" type="button" data-image="${r.image}" aria-label="${r.name} görselini aç">
-        <img src="${r.image}" alt="${r.name} kullanıcı görseli" />
-        <span>${r.name}</span>
+      <button class="review-thumb" type="button" data-image="${r.image}" aria-label="Yorum görselini aç">
+        <img src="${r.image}" alt="Müşteri yorum görseli" />
       </button>
     `).join('');
     qsa('.review-thumb', thumbStrip).forEach((btn) => {
@@ -143,16 +143,15 @@ function renderReviews(reviews) {
       <article class="review-card reveal visible">
         <div class="review-head">
           <div class="review-meta">
-            <strong>${r.name}</strong>
+            <strong>${displayInitials(r.name)}</strong>
             <span>${r.date || ''}${r.city ? ` · ${r.city}` : ''}</span>
           </div>
           <div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
         </div>
-        <div class="review-badge">✔ Doğrulanmış alıcı</div>
         <p class="review-text">${r.text}</p>
-        ${r.image ? `<img class="review-image" src="${r.image}" alt="${r.name} kullanıcı görseli" data-image="${r.image}" />` : ''}
+        ${r.image ? `<img class="review-image" src="${r.image}" alt="Müşteri yorum görseli" data-image="${r.image}" />` : ''}
         <div class="review-footer">
-          <span>${r.source || 'Satın alan müşteri yorumu'}</span>
+          <span>${r.date || 'Müşteri yorumu'}</span>
           <span>${r.helpful || 0} kişi faydalı buldu</span>
         </div>
       </article>

@@ -133,3 +133,83 @@ footer{background:#091a34;color:#dce4ef;padding:44px 0 100px;margin-top:30px}.fo
 .page-hero{padding:72px 0;background:radial-gradient(circle at top right,#efe3c6 0,#f7f3ec 45%,#f7f3ec 100%)}.page-hero .wrap{max-width:900px}.page-hero h1{font-size:62px}.page-hero p{font-size:18px;line-height:1.85;color:var(--muted);max-width:720px}
 .story-grid,.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.story-card-wide,.contact-card{background:#fff;border:1px solid var(--line);border-radius:28px;padding:30px;box-shadow:var(--shadow)}.story-card-wide p,.contact-card p{color:var(--muted);line-height:1.85}.story-card-wide h3,.contact-card h3{color:var(--navy-deep)}.value-list{display:grid;gap:14px;margin-top:18px}.value-list div{padding:16px;border-radius:18px;background:#f8f4ec;border:1px solid var(--line)}.value-list strong{display:block;margin-bottom:6px;color:var(--navy-deep)}.contact-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
 @media(max-width:760px){.welcome-card,.scent-card,.manifesto-grid,.story-grid,.contact-grid{grid-template-columns:1fr}.welcome-number{font-size:50px}.manifesto-visual img{min-height:360px}.contact-strip-inner{display:grid}.page-hero h1{font-size:46px}.nav-actions a:not(.nav-whatsapp){display:none}.whatsapp-float{bottom:86px}}
+
+/* ===== V3.1 responsive polish ===== */
+.topbar{overflow:hidden;display:block;padding:0;background:#0b1f3d;color:#fff;white-space:nowrap}
+.topbar-track{display:flex;width:max-content;animation:somneaMarquee 24s linear infinite;will-change:transform}
+.topbar-group{display:flex;align-items:center;gap:34px;padding:11px 17px;flex:none}
+.topbar-group span{font-size:12px;font-weight:700;letter-spacing:.01em}
+@keyframes somneaMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.topbar-track{animation:none}}
+
+/* Header WhatsApp removed: navigation stays minimal */
+.nav-actions{gap:24px}
+
+/* Package product imagery: never crop bottle */
+.package-card>img{object-fit:contain!important;background:#fff!important;padding:12px!important;height:230px!important}
+.double-pack,.triple-pack{background:#fbfaf7!important;overflow:hidden}
+.double-pack img,.triple-pack img{object-fit:contain!important;background:#fff!important;padding:6px!important}
+
+/* Reviews: width-safe, one continuous panel, small expandable images */
+.review-summary{width:100%;max-width:100%;min-width:0;overflow:hidden}
+.review-summary>*{min-width:0;max-width:100%}
+.photo-review-box{min-width:0;max-width:100%;overflow:hidden}
+.review-thumb-strip{width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;padding-bottom:8px}
+.review-thumb{min-width:78px!important;width:78px!important;height:78px!important;border-radius:14px!important}
+.review-thumb span{display:none!important}
+.review-grid{display:block!important;background:var(--surface);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;padding:0!important}
+.review-card{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:22px!important;margin:0!important;border-bottom:1px solid var(--line)!important}
+.review-card:last-child{border-bottom:0!important}
+.review-badge{display:none!important}
+.review-image{width:126px!important;height:112px!important;object-fit:cover!important;border-radius:14px!important;margin-top:4px!important;cursor:zoom-in!important}
+.review-footer{justify-content:flex-start!important;gap:18px!important}
+.review-meta strong{letter-spacing:.02em}
+
+/* Order package re-selection */
+.change-package{grid-column:1/-1;display:flex;align-items:center;justify-content:center;min-height:44px;border:1px solid #d7dde7;border-radius:14px;background:#fff;color:var(--navy-deep);font-size:13px;font-weight:900;transition:.2s}
+.change-package:hover{border-color:var(--navy);background:#f7f9fc}
+
+/* Professional footer */
+.site-footer{background:linear-gradient(180deg,#0a1a33 0%,#071426 100%);color:#dce4ef;padding:54px 0 96px;margin-top:34px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-main{display:grid;grid-template-columns:1.45fr .8fr .8fr 1.05fr;gap:42px;align-items:start}
+.footer-brand-block p{max-width:350px;color:#aebbd0;line-height:1.8;margin:14px 0 18px}
+.footer-trust{display:flex;flex-wrap:wrap;gap:8px}
+.footer-trust span{font-size:11px;font-weight:800;padding:8px 10px;border:1px solid rgba(255,255,255,.1);border-radius:999px;color:#d7e0ec;background:rgba(255,255,255,.035)}
+.footer-col{display:grid;gap:10px;align-content:start}
+.footer-col strong{color:#fff;font-size:13px;text-transform:uppercase;letter-spacing:.12em;margin-bottom:4px}
+.footer-col a,.footer-col span{color:#b9c5d6;font-size:13px;line-height:1.65}
+.footer-col a:hover{color:#fff}
+.footer-contact{padding:18px;border:1px solid rgba(255,255,255,.09);border-radius:18px;background:rgba(255,255,255,.035)}
+.footer-bottom{display:flex;justify-content:space-between;gap:24px;border-top:1px solid rgba(255,255,255,.08);margin-top:38px;padding-top:22px;color:#8190a5;font-size:11px}
+.footer-brand{color:#fff!important}
+
+/* WhatsApp: icon-only floating contact */
+.whatsapp-float{width:56px!important;height:56px!important;border-radius:999px!important;background:#25d366!important;color:#fff!important;display:grid!important;place-items:center!important;padding:0!important;box-shadow:0 14px 34px rgba(37,211,102,.35)!important}
+.whatsapp-float svg{width:29px;height:29px;fill:currentColor;display:block}
+
+@media(max-width:1024px){
+  .footer-main{grid-template-columns:1fr 1fr;gap:30px}
+}
+
+@media(max-width:760px){
+  .topbar-track{animation-duration:18s}
+  .topbar-group{gap:24px;padding:10px 12px}
+  .topbar-group span{font-size:11px}
+  .nav-actions{display:flex}
+  .nav-actions a{display:none!important}
+  .package-card>img{height:230px!important;object-fit:contain!important;padding:16px!important}
+  .review-summary{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+  .rating-box,.photo-review-box{width:100%!important;max-width:100%!important;min-width:0!important;padding:20px!important;box-sizing:border-box!important}
+  .photo-head{align-items:flex-start;flex-direction:column;gap:4px}
+  .review-thumb-strip{margin:0!important;width:100%!important;max-width:100%!important}
+  .review-grid{width:100%!important;max-width:100%!important;border-radius:22px!important}
+  .review-card{padding:18px!important}
+  .review-image{width:104px!important;height:94px!important}
+  .review-head{gap:8px}
+  .review-meta strong{font-size:15px!important}
+  .footer-main{grid-template-columns:1fr!important;gap:24px}
+  .footer-col{padding-top:2px}
+  .footer-bottom{display:grid;gap:8px}
+  .site-footer{padding-bottom:112px}
+  .whatsapp-float{right:16px!important;bottom:86px!important}
+}
