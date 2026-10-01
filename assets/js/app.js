@@ -29,6 +29,9 @@ const instagramLink = qs('#instagramLink');
 const facebookLink = qs('#facebookLink');
 if (instagramLink) instagramLink.href = cfg.instagramUrl || '#';
 if (facebookLink) facebookLink.href = cfg.facebookUrl || '#';
+const whatsappLinks = qsa('[data-whatsapp-link]');
+whatsappLinks.forEach((link) => { link.href = cfg.whatsappUrl || '#'; });
+qsa('[data-phone-display]').forEach((el) => { el.textContent = cfg.phoneDisplay || '0530 877 53 68'; });
 
 function syncPackage(key, scrollToOrder = false) {
   selectedPackageKey = key;
