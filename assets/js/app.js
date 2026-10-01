@@ -1,224 +1,422 @@
 const cfg = window.SOMNEA_CONFIG || {};
-const fmt = n => new Intl.NumberFormat('tr-TR').format(n);
-const qs = s => document.querySelector(s);
-const qsa = s => [...document.querySelectorAll(s)];
-
-const io = new IntersectionObserver(entries => entries.forEach(e => {
-  if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
-}), { threshold: .08 });
-qsa('.reveal').forEach(el => io.observe(el));
-
-if (qs('#instagramLink')) qs('#instagramLink').href = cfg.instagramUrl || '#';
-if (qs('#facebookLink')) qs('#facebookLink').href = cfg.facebookUrl || '#';
+const qs = (s, root = document) => root.querySelector(s);
+const qsa = (s, root = document) => [...root.querySelectorAll(s)];
+const fmt = (n) => new Intl.NumberFormat('tr-TR').format(n);
 
 const packages = {
-  single: { label: '1 Adet SOMNEA', short: '1’li paket', total: 699, saving: 0, quantity: 1 },
-  duo: { label: '2 Adet SOMNEA', short: '2’li paket', total: 1298, saving: (699 * 2) - 1298, quantity: 2 },
-  bundle: { label: '3 Adet SOMNEA', short: '3’lü paket', total: 1799, saving: (699 * 3) - 1799, quantity: 3 }
+  single: { label: '1 Adet SOMNEA', short: '1’li paket', total: cfg.prices?.single || 699, old: 699, saving: 0, quantity: 1 },
+  double: { label: '2 Adet SOMNEA', short: '2’li paket', total: cfg.prices?.double || 1299, old: 1398, saving: 99, quantity: 2 },
+  triple: { label: '3 Adet SOMNEA', short: '3’lü paket', total: cfg.prices?.triple || 1799, old: 2097, saving: 298, quantity: 3 }
 };
-let selected = 'bundle';
 
-function syncPackage(key) {
-  if (!packages[key]) return;
-  selected = key;
-  const p = packages[key];
-  qsa('.package-card').forEach(card => {
+let selectedPackageKey = 'triple';
+let locationTree = {};
+let reviewData = [];
+
+// reveal animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+qsa('.reveal').forEach((el) => observer.observe(el));
+
+// social links
+const instagramLink = qs('#instagramLink');
+const facebookLink = qs('#facebookLink');
+if (instagramLink) instagramLink.href = cfg.instagramUrl || '#';
+if (facebookLink) facebookLink.href = cfg.facebookUrl || '#';
+
+function syncPackage(key, scrollToOrder = false) {
+  selectedPackageKey = key;
+  const item = packages[key];
+  qsa('.package-card').forEach((card) => {
     const active = card.dataset.package === key;
     card.classList.toggle('selected', active);
-    card.setAttribute('aria-checked', active ? 'true' : 'false');
-    const label = card.querySelector('.select-label');
-    if (label) label.textContent = active ? 'Seçili' : 'Seç';
+    const label = qs('.select-label', card);
+    if (label) label.textContent = active ? 'Seçili paket ✓' : 'Bu paketi seç';
   });
-  if (qs('#summaryPackage')) qs('#summaryPackage').textContent = p.label;
-  if (qs('#summaryTotal')) qs('#summaryTotal').textContent = `${fmt(p.total)} TL`;
-  if (qs('#summarySaving')) qs('#summarySaving').textContent = p.saving ? `Tekli alıma göre ${fmt(p.saving)} TL avantaj` : 'Tekli deneme paketi';
-  if (qs('#formPackage')) qs('#formPackage').value = p.label;
-  if (qs('#formTotal')) qs('#formTotal').value = `${p.total} TL`;
-  if (qs('#stickyPackage')) qs('#stickyPackage').textContent = p.short;
-  if (qs('#stickyPrice')) qs('#stickyPrice').textContent = `${fmt(p.total)} TL`;
-  if (qs('#packageActionLabel')) qs('#packageActionLabel').textContent = `${p.label} · ${fmt(p.total)} TL`;
-}
-qsa('.package-card').forEach(card => card.addEventListener('click', () => syncPackage(card.dataset.package)));
-syncPackage('bundle');
 
-qsa('.js-package-link').forEach(link => link.addEventListener('click', () => setTimeout(() => qs('#packages')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 10)));
-qs('#continueToOrder')?.addEventListener('click', () => qs('#order')?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  const summaryPackage = qs('#summaryPackage');
+  const summaryTotal = qs('#summaryTotal');
+  const summarySaving = qs('#summarySaving');
+  const stickyPackage = qs('#stickyPackage');
+  const stickyPrice = qs('#stickyPrice');
+  const formPackage = qs('#formPackage');
+  const formTotal = qs('#formTotal');
 
-function updateTimer() {
-  const now = new Date();
-  const end = new Date(now);
-  end.setHours(23, 59, 59, 999);
-  let diff = Math.max(0, end - now);
-  const h = Math.floor(diff / 3600000);
-  diff %= 3600000;
-  const m = Math.floor(diff / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-  if (qs('#dealTimer')) qs('#dealTimer').textContent = [h, m, s].map(v => String(v).padStart(2, '0')).join(':');
-}
-updateTimer();
-setInterval(updateTimer, 1000);
+  if (summaryPackage) summaryPackage.textContent = item.label;
+  if (summaryTotal) summaryTotal.textContent = `${fmt(item.total)} TL`;
+  if (summarySaving) summarySaving.textContent = item.saving > 0 ? `${fmt(item.saving)} TL indirim` : 'Başlangıç paketi';
+  if (stickyPackage) stickyPackage.textContent = item.short;
+  if (stickyPrice) stickyPrice.textContent = `${fmt(item.total)} TL`;
+  if (formPackage) formPackage.value = item.label;
+  if (formTotal) formTotal.value = `${item.total} TL`;
 
-let allReviews = [];
-let reviewsExpanded = false;
-function renderReviews() {
-  const grid = qs('#reviewGrid');
-  if (!grid) return;
-  const visible = reviewsExpanded ? allReviews : allReviews.slice(0, 3);
-  grid.innerHTML = visible.map(r => `
-    <article class="review-card">
-      <div class="review-head"><strong>${r.name}</strong><span class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)}</span></div>
-      <p>${r.text}</p>
-      ${r.image ? `<img class="review-photo" src="${r.image}" alt="${r.name} müşteri değerlendirmesi" onerror="this.remove()">` : ''}
-    </article>`).join('');
-  const btn = qs('#toggleReviews');
-  if (btn) {
-    btn.hidden = allReviews.length <= 3;
-    btn.textContent = reviewsExpanded ? 'Daha az göster' : `Tüm ${allReviews.length} yorumu gör`;
+  if (scrollToOrder) {
+    const order = qs('#order');
+    if (order) setTimeout(() => order.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
   }
 }
+qsa('.package-card').forEach((card) => {
+  card.addEventListener('click', () => syncPackage(card.dataset.package));
+});
+syncPackage('triple');
 
+// countdown to end of day
+function updateCountdown() {
+  const target = qs('#dealCountdown');
+  if (!target) return;
+  const now = new Date();
+  const end = new Date();
+  end.setHours(23, 59, 59, 999);
+  const diff = Math.max(0, end - now);
+  const h = String(Math.floor(diff / 3600000)).padStart(2, '0');
+  const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+  const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+  target.textContent = `${h}:${m}:${s}`;
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// reviews
 async function loadReviews() {
   try {
     const res = await fetch('data/reviews.json');
     const data = await res.json();
-    allReviews = (data.reviews || []).filter(x => x.published === true);
-    if (!allReviews.length) { qs('#reviews')?.remove(); return; }
-    const avg = allReviews.reduce((a, b) => a + b.rating, 0) / allReviews.length;
-    if (qs('#ratingNumber')) qs('#ratingNumber').textContent = avg.toFixed(1).replace('.', ',');
-    if (qs('#ratingCount')) qs('#ratingCount').textContent = `${allReviews.length} müşteri değerlendirmesi`;
-    const chip = qs('#heroReviewChip');
-    if (chip) { chip.hidden = false; chip.querySelector('strong').textContent = `${avg.toFixed(1).replace('.', ',')}/5 · ${allReviews.length} değerlendirme`; }
-    renderReviews();
-  } catch (e) { console.warn('reviews', e); }
+    reviewData = (data.reviews || []).filter((r) => r.published !== false);
+    renderReviews(reviewData);
+  } catch (error) {
+    console.warn('reviews load error', error);
+  }
 }
-qs('#toggleReviews')?.addEventListener('click', () => { reviewsExpanded = !reviewsExpanded; renderReviews(); });
-loadReviews();
 
+function renderReviews(reviews) {
+  if (!reviews.length) return;
+  const avg = reviews.reduce((sum, item) => sum + item.rating, 0) / reviews.length;
+  const ratingNumber = qs('#ratingNumber');
+  const heroRatingValue = qs('#heroRatingValue');
+  const ratingCount = qs('#ratingCount');
+  const ratingBars = qs('#ratingBars');
+  const thumbStrip = qs('#reviewThumbStrip');
+  const reviewGrid = qs('#reviewGrid');
+
+  if (ratingNumber) ratingNumber.textContent = avg.toFixed(1).replace('.', ',');
+  if (heroRatingValue) heroRatingValue.textContent = avg.toFixed(1).replace('.', ',');
+  if (ratingCount) ratingCount.textContent = `${reviews.length} değerlendirme`;
+
+  if (ratingBars) {
+    ratingBars.innerHTML = [5, 4, 3, 2, 1].map((star) => {
+      const count = reviews.filter((r) => r.rating === star).length;
+      const pct = reviews.length ? (count / reviews.length) * 100 : 0;
+      return `
+        <div class="bar-row">
+          <span>${star}★</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div>
+          <b>${count}</b>
+        </div>
+      `;
+    }).join('');
+  }
+
+  const photoReviews = reviews.filter((r) => r.image).slice(0, 6);
+  if (thumbStrip) {
+    thumbStrip.innerHTML = photoReviews.map((r) => `
+      <button class="review-thumb" type="button" data-image="${r.image}" aria-label="${r.name} görselini aç">
+        <img src="${r.image}" alt="${r.name} kullanıcı görseli" />
+        <span>${r.name}</span>
+      </button>
+    `).join('');
+    qsa('.review-thumb', thumbStrip).forEach((btn) => {
+      btn.addEventListener('click', () => openLightbox(btn.dataset.image));
+    });
+  }
+
+  if (reviewGrid) {
+    reviewGrid.innerHTML = reviews.map((r) => `
+      <article class="review-card reveal visible">
+        <div class="review-head">
+          <div class="review-meta">
+            <strong>${r.name}</strong>
+            <span>${r.date || ''}${r.city ? ` · ${r.city}` : ''}</span>
+          </div>
+          <div class="stars">${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}</div>
+        </div>
+        <div class="review-badge">✔ Doğrulanmış alıcı</div>
+        <p class="review-text">${r.text}</p>
+        ${r.image ? `<img class="review-image" src="${r.image}" alt="${r.name} kullanıcı görseli" data-image="${r.image}" />` : ''}
+        <div class="review-footer">
+          <span>${r.source || 'Satın alan müşteri yorumu'}</span>
+          <span>${r.helpful || 0} kişi faydalı buldu</span>
+        </div>
+      </article>
+    `).join('');
+    qsa('.review-image', reviewGrid).forEach((img) => {
+      img.addEventListener('click', () => openLightbox(img.dataset.image));
+    });
+  }
+}
+
+// ugc
 async function loadUGC() {
   try {
     const res = await fetch('data/ugc.json');
     const data = await res.json();
-    const items = (data.items || []).filter(x => x.published === true);
-    if (!items.length) { qs('#ugc')?.remove(); return; }
-    qs('#ugcGrid').innerHTML = items.map(i => `<article class="ugc-card"><img src="${i.image}" alt="SOMNEA gece ritüeli"><div class="ugc-overlay"><strong>${i.caption || ''}</strong></div></article>`).join('');
-  } catch (e) { console.warn('ugc', e); }
+    const items = (data.items || []).filter((item) => item.published !== false);
+    const track = qs('#ugcTrack');
+    if (!track || !items.length) return;
+    track.innerHTML = items.map((item) => `
+      <article class="ugc-item">
+        <img src="${item.image}" alt="SOMNEA gece ritüeli" />
+        <div class="ugc-caption">${item.caption || item.name || 'Gece rutini'}</div>
+      </article>
+    `).join('');
+  } catch (error) {
+    console.warn('ugc load error', error);
+  }
 }
-loadUGC();
 
-qsa('[data-carousel="ugc"]').forEach(btn => btn.addEventListener('click', () => {
-  const track = qs('#ugcGrid');
-  if (!track) return;
-  track.scrollBy({ left: (btn.classList.contains('next') ? 1 : -1) * Math.min(320, track.clientWidth * .82), behavior: 'smooth' });
-}));
+// lightbox
+const lightbox = qs('#imageLightbox');
+const lightboxImage = qs('#lightboxImage');
+const lightboxClose = qs('#lightboxClose');
 
-const city = qs('#citySelect'), district = qs('#districtSelect'), neighborhood = qs('#neighborhoodSelect');
-let locationTree = {};
+function openLightbox(src) {
+  if (!lightbox || !lightboxImage || !src) return;
+  lightboxImage.src = src;
+  lightbox.hidden = false;
+}
+function closeLightbox() {
+  if (!lightbox || !lightboxImage) return;
+  lightbox.hidden = true;
+  lightboxImage.src = '';
+}
+if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+if (lightbox) lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeLightbox();
+    closeSuccessModal();
+  }
+});
+
+// location hierarchy - province/district only
+const citySelect = qs('#citySelect');
+const districtSelect = qs('#districtSelect');
+
 function normalizeLocations(raw) {
   if (Array.isArray(raw)) {
     const out = {};
-    raw.forEach(p => {
-      const pn = p.il_adi || p.name; if (!pn) return; out[pn] = {};
-      (p.ilceler || []).forEach(d => { out[pn][d.ilce_adi || d.name] = (d.mahalleler || []).map(m => typeof m === 'string' ? m : (m.mahalle_adi || m.name)).filter(Boolean); });
+    raw.forEach((province) => {
+      const provinceName = province.il_adi || province.name;
+      if (!provinceName) return;
+      out[provinceName] = {};
+      (province.ilceler || []).forEach((district) => {
+        const districtName = district.ilce_adi || district.name;
+        if (districtName) out[provinceName][districtName] = [];
+      });
     });
     return out;
   }
   const out = {};
-  Object.entries(raw || {}).forEach(([p, v]) => {
-    if (p.startsWith('_')) return;
-    if (v?.ilceler) { out[p] = {}; Object.entries(v.ilceler).forEach(([d, ms]) => out[p][d] = Array.isArray(ms) ? ms : []); }
-    else if (v && typeof v === 'object') out[p] = v;
+  Object.entries(raw || {}).forEach(([provinceName, value]) => {
+    if (provinceName.startsWith('_')) return;
+    if (value?.ilceler) {
+      out[provinceName] = {};
+      Object.keys(value.ilceler).forEach((districtName) => {
+        out[provinceName][districtName] = [];
+      });
+    } else if (value && typeof value === 'object') {
+      out[provinceName] = {};
+      Object.keys(value).forEach((districtName) => {
+        out[provinceName][districtName] = [];
+      });
+    }
   });
   return out;
 }
+
 function populateCities() {
-  if (!city) return;
-  city.innerHTML = '<option value="">İl seçin</option>' + Object.keys(locationTree).sort((a,b) => a.localeCompare(b,'tr')).map(x => `<option>${x}</option>`).join('');
+  if (!citySelect) return;
+  const options = Object.keys(locationTree).sort((a, b) => a.localeCompare(b, 'tr'));
+  citySelect.innerHTML = '<option value="">İl seçin</option>' + options.map((name) => `<option value="${name}">${name}</option>`).join('');
 }
+
 async function loadLocations() {
   try {
-    const r = await fetch('data/turkey_locations.json');
-    locationTree = normalizeLocations(await r.json());
+    const response = await fetch('data/turkey_locations.json');
+    let raw = await response.json();
+    locationTree = normalizeLocations(raw);
+
     if (Object.keys(locationTree).length < 20 && cfg.remoteLocationFallback) {
-      try { const rr = await fetch(cfg.remoteLocationFallback); if (rr.ok) { const full = normalizeLocations(await rr.json()); if (Object.keys(full).length > 20) locationTree = full; } } catch (_) {}
+      try {
+        const remote = await fetch(cfg.remoteLocationFallback);
+        if (remote.ok) {
+          const remoteRaw = await remote.json();
+          const remoteTree = normalizeLocations(remoteRaw);
+          if (Object.keys(remoteTree).length > 20) locationTree = remoteTree;
+        }
+      } catch (_) {}
     }
     populateCities();
-  } catch (e) { console.warn('locations', e); }
+  } catch (error) {
+    console.warn('location load error', error);
+  }
 }
-city?.addEventListener('change', () => {
-  const ds = Object.keys(locationTree[city.value] || {}).sort((a,b) => a.localeCompare(b,'tr'));
-  district.innerHTML = '<option value="">İlçe seçin</option>' + ds.map(x => `<option>${x}</option>`).join('');
-  district.disabled = !ds.length;
-  neighborhood.innerHTML = '<option value="">Mahalle seçin</option>';
-  neighborhood.disabled = true;
-});
-district?.addEventListener('change', () => {
-  const ns = (locationTree[city.value]?.[district.value] || []).sort((a,b) => a.localeCompare(b,'tr'));
-  neighborhood.innerHTML = '<option value="">Mahalle seçin</option>' + ns.map(x => `<option>${x}</option>`).join('');
-  neighborhood.disabled = !ns.length;
-});
-loadLocations();
 
-const phone = qs('input[name="telefon"]');
-phone?.addEventListener('input', () => phone.value = phone.value.replace(/[^0-9+ ]/g, '').slice(0, 16));
+if (citySelect && districtSelect) {
+  citySelect.addEventListener('change', () => {
+    const districts = Object.keys(locationTree[citySelect.value] || {}).sort((a, b) => a.localeCompare(b, 'tr'));
+    districtSelect.innerHTML = '<option value="">İlçe seçin</option>' + districts.map((name) => `<option value="${name}">${name}</option>`).join('');
+    districtSelect.disabled = !districts.length;
+  });
+}
 
-const ORDER_API_URL = 'https://somnea-order-api.webliodijital.workers.dev/';
+// phone cleanup
+const phoneInput = qs('input[name="telefon"]');
+if (phoneInput) {
+  phoneInput.addEventListener('input', () => {
+    phoneInput.value = phoneInput.value.replace(/[^0-9+ ]/g, '').slice(0, 16);
+  });
+}
+
+// order submission
+const ORDER_API_URL = cfg.orderApiUrl || 'https://somnea-order-api.webliodijital.workers.dev/';
 const orderForm = qs('#orderForm');
 const orderMessage = qs('#orderMessage');
+const successModal = qs('#successModal');
+const successTitle = qs('#successTitle');
+const successText = qs('#successText');
+const successClose = qs('#successClose');
+
 function showOrderMessage(message, type = 'success') {
   if (!orderMessage) return;
   orderMessage.hidden = false;
   orderMessage.textContent = message;
-  orderMessage.style.cssText = `margin-top:6px;padding:13px 14px;border-radius:12px;font-weight:700;line-height:1.45;background:${type === 'success' ? '#eef9f1' : '#fff1f1'};border:1px solid ${type === 'success' ? '#b9e3c3' : '#efc2c2'};color:${type === 'success' ? '#17652e' : '#9a2727'}`;
+  orderMessage.style.background = type === 'success' ? '#eef9f1' : '#fff1f1';
+  orderMessage.style.border = type === 'success' ? '1px solid #b9e3c3' : '1px solid #efc2c2';
+  orderMessage.style.color = type === 'success' ? '#17652e' : '#9a2727';
 }
-function splitName(fullName) {
-  const parts = fullName.trim().split(/\s+/).filter(Boolean);
-  if (parts.length <= 1) return { firstName: parts[0] || '', lastName: '-' };
-  return { firstName: parts.slice(0, -1).join(' '), lastName: parts.at(-1) };
+
+function openSuccessModal(firstName) {
+  if (!successModal || !successTitle || !successText) return;
+  successTitle.textContent = `Tebrikler ${firstName || ''}!`;
+  successText.textContent = 'Siparişiniz alındı. En kısa sürede size ulaşılıp sipariş teyidiniz yapılacaktır.';
+  successModal.hidden = false;
 }
+
+function closeSuccessModal() {
+  if (successModal) successModal.hidden = true;
+}
+if (successClose) successClose.addEventListener('click', closeSuccessModal);
+if (successModal) {
+  successModal.addEventListener('click', (e) => {
+    if (e.target === successModal) closeSuccessModal();
+  });
+}
+
 if (orderForm) {
-  orderForm.addEventListener('submit', async event => {
+  orderForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (!orderForm.reportValidity()) return;
+    const addressField = qs('#addressField');
+    const paymentField = qs('#paymentMethod');
     const honeypot = orderForm.querySelector('[name="bot-field"]');
-    if (honeypot?.value.trim()) return;
+
+    if (honeypot && honeypot.value.trim()) return;
+    if (!addressField?.value.trim()) {
+      addressField.focus();
+      addressField.setCustomValidity('Lütfen açık adresinizi girin.');
+      orderForm.reportValidity();
+      return;
+    }
+    addressField.setCustomValidity('');
+
+    if (!paymentField?.value) {
+      paymentField.focus();
+      paymentField.setCustomValidity('Lütfen ödeme yöntemini seçin.');
+      orderForm.reportValidity();
+      return;
+    }
+    paymentField.setCustomValidity('');
+
+    if (!orderForm.reportValidity()) return;
+
     const submitButton = orderForm.querySelector('button[type="submit"]');
-    const originalText = submitButton?.textContent || '';
-    const fd = new FormData(orderForm);
-    const p = packages[selected];
-    const names = splitName(String(fd.get('adsoyad') || ''));
+    const originalText = submitButton ? submitButton.textContent : '';
+    const formData = new FormData(orderForm);
+    const selectedItem = packages[selectedPackageKey];
+
     const payload = {
-      firstName: names.firstName,
-      lastName: names.lastName,
-      phone: String(fd.get('telefon') || '').trim(),
-      province: String(fd.get('il') || '').trim(),
-      district: String(fd.get('ilce') || '').trim(),
-      neighborhood: String(fd.get('mahalle') || '').trim(),
-      address: String(fd.get('adres') || '').trim(),
-      paymentMethod: String(fd.get('odeme') || '').trim(),
-      packageName: p.label,
-      packagePrice: `${fmt(p.total)} TL`,
-      quantity: p.quantity
+      firstName: String(formData.get('ad') || '').trim(),
+      lastName: String(formData.get('soyad') || '').trim(),
+      phone: String(formData.get('telefon') || '').trim(),
+      province: String(formData.get('il') || '').trim(),
+      district: String(formData.get('ilce') || '').trim(),
+      address: String(formData.get('adres') || '').trim(),
+      paymentMethod: String(formData.get('odeme') || '').trim(),
+      packageName: selectedItem.label,
+      packagePrice: `${fmt(selectedItem.total)} TL`,
+      quantity: selectedItem.quantity
     };
+
     try {
-      if (submitButton) { submitButton.disabled = true; submitButton.textContent = 'Siparişiniz gönderiliyor...'; }
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Siparişiniz gönderiliyor...';
+      }
       if (orderMessage) orderMessage.hidden = true;
-      const response = await fetch(ORDER_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+
+      const response = await fetch(ORDER_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
       let result = {};
       try { result = await response.json(); } catch (_) {}
-      if (!response.ok || result.ok !== true) throw new Error(result.error || 'Sipariş gönderilemedi.');
-      showOrderMessage('✅ Sipariş kaydınız alındı. En kısa sürede sizinle iletişime geçeceğiz.', 'success');
-      if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', { value: Number(p.total), currency: 'TRY', content_name: p.label, content_type: 'product', num_items: p.quantity });
+
+      if (!response.ok || result.ok !== true) {
+        throw new Error(result.error || 'Sipariş gönderilemedi.');
       }
+
+      showOrderMessage('Sipariş kaydınız alındı. En kısa sürede sizinle iletişime geçeceğiz.', 'success');
+      openSuccessModal(payload.firstName);
+
+      if (typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead', {
+          value: Number(selectedItem.total),
+          currency: 'TRY',
+          content_name: selectedItem.label,
+          content_type: 'product',
+          num_items: selectedItem.quantity
+        });
+      }
+
       orderForm.reset();
-      if (district) { district.innerHTML = '<option value="">İlçe seçin</option>'; district.disabled = true; }
-      if (neighborhood) { neighborhood.innerHTML = '<option value="">Mahalle seçin</option>'; neighborhood.disabled = true; }
-      orderMessage?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (districtSelect) {
+        districtSelect.innerHTML = '<option value="">İlçe seçin</option>';
+        districtSelect.disabled = true;
+      }
+      syncPackage(selectedPackageKey);
+      if (orderMessage) orderMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
     } catch (error) {
       console.error('Order submit error:', error);
       showOrderMessage('Sipariş şu anda gönderilemedi. Lütfen bilgilerinizi kontrol edip tekrar deneyin.', 'error');
     } finally {
-      if (submitButton) { submitButton.disabled = false; submitButton.textContent = originalText; }
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
     }
   });
 }
+
+loadLocations();
+loadReviews();
+loadUGC();

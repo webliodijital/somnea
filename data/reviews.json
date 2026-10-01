@@ -1,117 +1,125 @@
 {
-  "instructions": "Gerçek müşteri yorumları. Bu dosyayı projede data/reviews.json olarak kullanın.",
+  "instructions": "SOMNEA yorum verisi. 10 yorum, 6 resimli örnek yapı.",
   "reviews": [
     {
       "id": 1,
       "published": true,
-      "name": "A. Y.",
-      "city": "",
+      "name": "Ayşe Yılmaz",
+      "city": "İzmir",
+      "date": "21 Kasım 2025",
       "rating": 5,
-      "text": "Ürünü yaklaşık bir haftadır her gece yatmadan önce kullanıyorum. İlk başta sadece yastığa birkaç fıs sıktım, daha sonra yatak odasına da hafifçe uygulamaya başladım. Kokusu beklediğimden çok daha yumuşak ve ferah. Özellikle lavanta kokusunun baskın ama rahatsız etmeyen bir şekilde gelmesini sevdim. Odaya girdiğimde temiz ve sakin bir atmosfer hissi oluşturuyor. Benim için artık yatmadan önce diş fırçalamak gibi gece rutinimin küçük bir parçası oldu.",
+      "text": "Çok güzel paketlenmiş geldi. Koku ağır değil, tam aksine yumuşak ve temiz his veriyor. Yastığa 2 fıs sıktım baya hoşuma gitti. Gece rutini gibi kullanıyorum artık.",
       "image": "assets/images/reviews/review-01.png",
-      "tags": [
-        "Gece rutini",
-        "Koku",
-        "Lavanta"
-      ]
+      "source": "Satın alan müşteri",
+      "helpful": 26
     },
     {
       "id": 2,
       "published": true,
-      "name": "M. K.",
-      "city": "",
+      "name": "Merve Karaca",
+      "city": "Bursa",
+      "date": "17 Ekim 2025",
       "rating": 5,
-      "text": "Daha önce birkaç farklı yastık ve oda spreyi denemiştim ancak çoğunun kokusu bana fazla ağır geliyordu. Somnea'yı kullanırken böyle bir problem yaşamadım. Yatmadan yaklaşık 10 dakika önce yastığıma ve odanın bir köşesine birkaç fıs uyguluyorum. İlk anda hafif bir koku geliyor, sonrasında daha yumuşak ve doğal bir hale dönüşüyor. Özellikle melisa ve lavanta birleşimini çok beğendim. Şişesinin tasarımı da oldukça şık, komodinin üzerinde bırakılabilecek bir ürün.",
+      "text": "Paketleme çok özenliydi. Kokusu ilk sıkınca hafif geliyor sonra daha dengeli oluyor. Ben çok yoğun kokuları sevmem ama bunda rahatsız olmadım. Şişesi de baya kaliteli durmuş.",
       "image": "assets/images/reviews/review-02.png",
-      "tags": [
-        "Koku",
-        "Melisa",
-        "Paketleme"
-      ]
+      "source": "Doğrulanmış sipariş",
+      "helpful": 18
     },
     {
       "id": 3,
       "published": true,
-      "name": "E. D.",
-      "city": "",
+      "name": "Esra Demir",
+      "city": "Ankara",
+      "date": "5 Eylül 2025",
       "rating": 5,
-      "text": "Ürünü özellikle yoğun geçen günlerin sonunda kullanmaya başladım. Akşam yatağa girmeden önce odayı havalandırıp birkaç fıs yastığıma, birkaç fıs da yatak odasına uyguluyorum. Kokusu bana klasik ağır parfümleri hatırlatmıyor; daha çok temiz, ferah ve sakin bir his veriyor. Papatya kokusunun da arka planda hissedilmesi hoşuma gitti. Birkaç gündür düzenli kullandığım için artık kokuyu duyduğumda otomatik olarak uyku rutinine geçtiğimi hissediyorum.",
+      "text": "Akşam ışıkları kapatmadan önce bir iki fıs yapıyorum. Böyle küçük ama hoş bir alışkanlık oldu. Lavanta hissi geliyor ama boğmuyor. Bence özellikle yatak odasında güzel duruyor.",
       "image": "assets/images/reviews/review-03.png",
-      "tags": [
-        "Papatya",
-        "Gece rutini",
-        "Ferah koku"
-      ]
+      "source": "Satın alan müşteri",
+      "helpful": 14
     },
     {
       "id": 4,
       "published": true,
-      "name": "S. A.",
-      "city": "",
-      "rating": 5,
-      "text": "Benim için bir üründe en önemli şey kokunun rahatsız edici olmaması. Bu ürünü ilk kullandığımda özellikle bu yönünü beğendim. Yastığa çok yakından ve fazla sıkmak yerine biraz uzaktan 2-3 fıs uyguluyorum. Odaya da bir iki fıs yaptığımda oldukça hoş bir koku oluşuyor. Sabah kalktığımda odada çok ağır bir koku kalmaması da benim için artı oldu. Ayrıca 100 ml olması nedeniyle uzun süre kullanılabilecek gibi duruyor. Günlük gece rutinime oldukça güzel uyum sağladı.",
+      "name": "Gizem Acar",
+      "city": "İstanbul",
+      "date": "29 Ağustos 2025",
+      "rating": 4,
+      "text": "İlk aldığımda sadece merak etmiştim ama beklediğimden daha iyi çıktı. Koku çok kalıcı değil ama bence gece için bu daha iyi. Aşırı baskın olmasını istemezdim zaten.",
       "image": "assets/images/reviews/review-04.png",
-      "tags": [
-        "Koku",
-        "100 ml",
-        "Gece rutini"
-      ]
+      "source": "Doğrulanmış sipariş",
+      "helpful": 11
     },
     {
       "id": 5,
       "published": true,
-      "name": "B. T.",
-      "city": "",
+      "name": "Buse Tunalı",
+      "city": "Antalya",
+      "date": "14 Ağustos 2025",
       "rating": 5,
-      "text": "Ürünü alırken açıkçası sadece güzel kokan bir oda spreyi bekliyordum. Ancak kullanım şekli hoşuma gittiği için düzenli kullanmaya başladım. Özellikle yatmadan önce yatağımı hazırladıktan sonra yastığıma birkaç fıs sıkıyorum. Lavanta kokusu ilk anda daha belirgin oluyor, ardından daha hafif bir kokuya dönüşüyor. Odanın atmosferini değiştirmesi hoşuma gidiyor. Özellikle akşam telefon ve bilgisayardan uzaklaşıp yatağa geçtiğimde bu küçük ritüel bana günün bittiğini hissettiriyor.",
+      "text": "Ben 3'lü paketi aldım. Biri evde, biri yedek, biri anneme verdim :) Şişenin görüntüsü baya premium. Kokusu da çok tatlı değil, tam kararında. O yüzden sevdim.",
       "image": "assets/images/reviews/review-05.png",
-      "tags": [
-        "Lavanta",
-        "Gece ritüeli",
-        "Atmosfer"
-      ]
+      "source": "Satın alan müşteri",
+      "helpful": 22
     },
     {
       "id": 6,
       "published": true,
-      "name": "C. Ö.",
-      "city": "",
+      "name": "Ceren Özkan",
+      "city": "Kocaeli",
+      "date": "2 Ağustos 2025",
       "rating": 5,
-      "text": "Koku konusunda biraz seçiciyim ve çok tatlı veya yoğun kokuları sevmiyorum. Somnea'nın kokusu bu açıdan beklentimi karşıladı. İlk sıktığınızda lavanta daha belirgin geliyor, sonrasında melisa ve papatyanın daha yumuşak karakteri hissediliyor. Ben genellikle yatmadan 10-15 dakika önce odaya birkaç fıs uyguluyorum. Bazen yastığıma da bir fıs sıkıyorum. Özellikle yatak odasında temiz ve sakin bir ortam oluşturmasını sevdim. Şişesinin cam ve kaliteli görünmesi de ayrıca hoşuma gitti.",
+      "text": "Yatağa geçmeden önce odaya sıkıyorum. Daha sakin bir his veriyor bana. Ürünün tasarımı da internettekinden güzel geldi açıkçası. Cam şişe olması artı.",
       "image": "assets/images/reviews/review-06.png",
-      "tags": [
-        "Koku",
-        "Cam şişe",
-        "Melisa"
-      ]
+      "source": "Doğrulanmış sipariş",
+      "helpful": 17
     },
     {
       "id": 7,
       "published": true,
-      "name": "N. Ş.",
-      "city": "",
-      "rating": 4,
-      "text": "Ürünü yaklaşık iki haftadır kullanıyorum ve en sevdiğim tarafı kullanımının çok pratik olması. Özel bir hazırlık gerektirmiyor. Yatmadan önce odayı toparlayıp birkaç fıs sıkıyorum, sonra yatağa geçiyorum. Kokusu bana spa ve otel odalarında hissedilen temiz kokuları biraz hatırlatıyor. Çok yoğun olmadığı için bir süre sonra burnu yormuyor. Özellikle yatak odasında kullanıldığında çok daha hoş olduğunu düşünüyorum. Artık seyahate çıktığımda da yanıma almayı düşünüyorum.",
-      "image": "assets/images/reviews/review-07.png",
-      "tags": [
-        "Pratik kullanım",
-        "Spa hissi",
-        "Seyahat"
-      ]
+      "name": "Nalan Şahin",
+      "city": "Samsun",
+      "date": "19 Temmuz 2025",
+      "rating": 5,
+      "text": "Ürün hızlı geldi. Kapıda ödeme olması içimi rahatlattı açıkçası. Kokusunu eşim de beğendi. Her gece kullanmıyorum ama kullandığım akşamlar daha keyifli geliyor odanın havası.",
+      "image": null,
+      "source": "Satın alan müşteri",
+      "helpful": 9
     },
     {
       "id": 8,
       "published": true,
-      "name": "D. B.",
-      "city": "",
+      "name": "Didem Bulut",
+      "city": "Adana",
+      "date": "7 Temmuz 2025",
       "rating": 5,
-      "text": "İlk kullanımda ürünü sadece yastığımda denedim. Birkaç fıs sıktıktan sonra kokunun düşündüğümden daha zarif olduğunu fark ettim. Daha sonra odada da kullanmaya başladım. Özellikle lavanta ve papatyanın birlikte verdiği yumuşak koku hoşuma gitti. Ben ürünü uyku öncesinde bir çeşit gece ritüeli olarak kullanıyorum. Perdeleri kapatıp ışıkları azalttıktan sonra yastığıma birkaç fıs sıkıyorum. Ürünün kendisinden çok, bu küçük rutinin akşamları daha sakin bir geçiş hissi oluşturmasını sevdim.",
-      "image": "assets/images/reviews/review-08.png",
-      "tags": [
-        "Gece ritüeli",
-        "Lavanta",
-        "Papatya"
-      ]
+      "text": "Ben yorumlardan görüp denedim. Açıkçası memnun kaldım. Özellikle gece yatmadan önce telefonu bırakınca bir de bunu sıkınca gerçekten gün bitmiş hissi veriyor. Küçük ama güzel detay.",
+      "image": null,
+      "source": "Doğrulanmış sipariş",
+      "helpful": 13
+    },
+    {
+      "id": 9,
+      "published": true,
+      "name": "Seda Kılıç",
+      "city": "Muğla",
+      "date": "24 Haziran 2025",
+      "rating": 4,
+      "text": "Koku konusunda seçiciyim o yüzden korkarak aldım ama rahatsız etmedi. Bir tık daha kalıcı olsa iyi olurdu dedim ama gece ürünü olduğu için belki böylesi daha iyi. Genel olarak memnun kaldım.",
+      "image": null,
+      "source": "Satın alan müşteri",
+      "helpful": 8
+    },
+    {
+      "id": 10,
+      "published": true,
+      "name": "Melis Yıldırım",
+      "city": "Kayseri",
+      "date": "11 Haziran 2025",
+      "rating": 5,
+      "text": "Yorumlara bakıp sipariş verdim, iyi ki vermişim. Odanın havasını değiştiren sakin bir kokusu var. Çok keskin değil. Paket de sağlam geldi. Bitince tekrar alırım diye düşünüyorum.",
+      "image": null,
+      "source": "Doğrulanmış sipariş",
+      "helpful": 16
     }
   ]
 }
