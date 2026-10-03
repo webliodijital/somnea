@@ -63,7 +63,18 @@ function syncPackage(key, scrollToOrder = false) {
   }
 }
 qsa('.package-card').forEach((card) => {
-  card.addEventListener('click', () => syncPackage(card.dataset.package));
+  card.addEventListener('click', () => {
+    syncPackage(card.dataset.package);
+    const item = packages[card.dataset.package];
+    if (typeof window.fbq === 'function' && item) {
+      window.fbq('trackCustom', 'PackageSelected', {
+        value: Number(item.total),
+        currency: 'TRY',
+        content_name: item.label,
+        num_items: item.quantity
+      });
+    }
+  });
 });
 syncPackage('triple');
 
@@ -321,6 +332,22 @@ if (successModal) {
 }
 
 if (orderForm) {
+  let initiateCheckoutSent = false;
+  const sendInitiateCheckout = () => {
+    if (initiateCheckoutSent) return;
+    initiateCheckoutSent = true;
+    const item = packages[selectedPackageKey];
+    if (typeof window.fbq === 'function' && item) {
+      window.fbq('track', 'InitiateCheckout', {
+        value: Number(item.total),
+        currency: 'TRY',
+        content_name: item.label,
+        content_type: 'product',
+        num_items: item.quantity
+      });
+    }
+  };
+  orderForm.addEventListener('focusin', sendInitiateCheckout, { once: true });
   orderForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const addressField = qs('#addressField');
