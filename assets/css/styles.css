@@ -265,3 +265,7 @@ body.conversion-page{background:#e9edf2;color:#0b1f3d}
   .conversion-section{padding:38px 16px}
   .conversion-head h1,.conversion-head h2{font-size:34px}
 }
+
+/* Fix: selected package summary values on white cards */
+.conversion-page .order-summary>div{background:#fff!important;}
+.conversion-page .order-summary strong{color:var(--navy-deep)!important;}
