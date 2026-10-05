@@ -269,3 +269,41 @@ body.conversion-page{background:#e9edf2;color:#0b1f3d}
 /* Fix: selected package summary values on white cards */
 .conversion-page .order-summary>div{background:#fff!important;}
 .conversion-page .order-summary strong{color:var(--navy-deep)!important;}
+
+/* V4.1 conversion optimization */
+.hero-price-anchor{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  margin:0;padding:16px 20px;background:#e1b95f;color:#071a33;
+  border-top:1px solid rgba(7,26,51,.06);border-bottom:1px solid rgba(7,26,51,.08);
+  text-decoration:none
+}
+.hero-price-anchor span{display:grid;gap:2px;text-align:left}
+.hero-price-anchor strong{font-size:16px;line-height:1.25;font-weight:900}
+.hero-price-anchor small{font-size:11px;font-weight:700;opacity:.78}
+.hero-price-anchor b{font-size:12px;white-space:nowrap;background:#071a33;color:#fff;padding:10px 12px;border-radius:12px}
+
+.review-extra{display:none!important}
+.review-grid.show-all-reviews .review-extra{display:block!important}
+.review-toggle{
+  width:100%;margin-top:14px;min-height:48px;border:1px solid #d7dce3;border-radius:14px;
+  background:#fff;color:#0b1f3d;font:800 14px Manrope,sans-serif;cursor:pointer
+}
+.review-toggle:hover{background:#fbfaf7}
+
+.checkout-trust-strip{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 16px
+}
+.checkout-trust-strip>div{
+  display:grid;gap:3px;padding:14px 15px;background:#fff;border:1px solid #e4e8ee;border-radius:16px
+}
+.checkout-trust-strip strong{font-size:13px;color:#0b1f3d}
+.checkout-trust-strip span{font-size:11px;line-height:1.4;color:#687385}
+
+@media(max-width:760px){
+  .hero-price-anchor{padding:14px 16px;gap:10px}
+  .hero-price-anchor strong{font-size:14px}
+  .hero-price-anchor small{font-size:10px}
+  .hero-price-anchor b{font-size:11px;padding:9px 10px}
+  .checkout-trust-strip{grid-template-columns:1fr 1fr;gap:8px}
+  .checkout-trust-strip>div{padding:12px}
+}

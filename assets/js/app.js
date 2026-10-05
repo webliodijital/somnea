@@ -147,8 +147,8 @@ function renderReviews(reviews) {
   }
 
   if (reviewGrid) {
-    reviewGrid.innerHTML = reviews.map((r) => `
-      <article class="review-card reveal visible">
+    reviewGrid.innerHTML = reviews.map((r, index) => `
+      <article class="review-card reveal visible${index >= 5 ? ' review-extra' : ''}">
         <div class="review-head">
           <div class="review-meta">
             <strong>${displayInitials(r.name)}</strong>
@@ -167,6 +167,21 @@ function renderReviews(reviews) {
     qsa('.review-image', reviewGrid).forEach((img) => {
       img.addEventListener('click', () => openLightbox(img.dataset.image));
     });
+
+    const reviewToggle = qs('#reviewToggle');
+    const extraReviews = qsa('.review-extra', reviewGrid);
+    if (reviewToggle) {
+      if (!extraReviews.length) {
+        reviewToggle.hidden = true;
+      } else {
+        reviewToggle.hidden = false;
+        reviewToggle.addEventListener('click', () => {
+          const expanded = reviewGrid.classList.toggle('show-all-reviews');
+          reviewToggle.setAttribute('aria-expanded', String(expanded));
+          reviewToggle.textContent = expanded ? 'Daha az yorum göster' : 'Tüm yorumları gör';
+        });
+      }
+    }
   }
 }
 
