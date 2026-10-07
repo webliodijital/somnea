@@ -63,7 +63,7 @@ function syncPackage(key, scrollToOrder = false) {
   }
 }
 qsa('.package-card').forEach((card) => {
-  card.addEventListener('click', () => syncPackage(card.dataset.package));
+  card.addEventListener('click', () => syncPackage(card.dataset.package, true));
 });
 syncPackage('triple');
 
@@ -194,6 +194,11 @@ function closeLightbox() {
   lightboxImage.src = '';
 }
 if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+
+qsa('.mini-review-list img').forEach((img) => {
+  img.style.cursor = 'zoom-in';
+  img.addEventListener('click', () => openLightbox(img.getAttribute('src')));
+});
 if (lightbox) lightbox.addEventListener('click', (e) => {
   if (e.target === lightbox) closeLightbox();
 });
@@ -414,6 +419,17 @@ if (orderForm) {
       }
     }
   });
+}
+
+const finalSubmitButton = qs('.submit-cta');
+const stickyOrder = qs('.sticky-order');
+if (finalSubmitButton && stickyOrder) {
+  const stickyObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      stickyOrder.classList.toggle('is-hidden', entry.isIntersecting);
+    });
+  }, { threshold: 0.15 });
+  stickyObserver.observe(finalSubmitButton);
 }
 
 loadLocations();
