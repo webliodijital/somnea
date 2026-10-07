@@ -393,7 +393,7 @@ if (orderForm) {
       openSuccessModal(payload.firstName);
 
       if (typeof window.fbq === 'function') {
-        window.fbq('track', 'Lead', {
+        window.fbq('track', 'Purchase', {
           value: Number(selectedItem.total),
           currency: 'TRY',
           content_name: selectedItem.label,
