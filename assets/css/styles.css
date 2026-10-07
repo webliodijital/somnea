@@ -768,3 +768,9 @@ button { border: 0; cursor: pointer; background: none; }
 @media (min-width: 768px) {
   body { padding: 24px 0; }
 }
+
+/* Modal/lightbox must stay hidden until JS explicitly opens them */
+.success-modal[hidden],
+.lightbox[hidden] {
+  display: none !important;
+}
