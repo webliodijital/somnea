@@ -63,18 +63,7 @@ function syncPackage(key, scrollToOrder = false) {
   }
 }
 qsa('.package-card').forEach((card) => {
-  card.addEventListener('click', () => {
-    syncPackage(card.dataset.package);
-    const item = packages[card.dataset.package];
-    if (typeof window.fbq === 'function' && item) {
-      window.fbq('trackCustom', 'PackageSelected', {
-        value: Number(item.total),
-        currency: 'TRY',
-        content_name: item.label,
-        num_items: item.quantity
-      });
-    }
-  });
+  card.addEventListener('click', () => syncPackage(card.dataset.package));
 });
 syncPackage('triple');
 
@@ -147,8 +136,9 @@ function renderReviews(reviews) {
   }
 
   if (reviewGrid) {
-    reviewGrid.innerHTML = reviews.map((r, index) => `
-      <article class="review-card reveal visible${index >= 5 ? ' review-extra' : ''}">
+    const visibleReviews = reviews.slice(0, 6);
+    reviewGrid.innerHTML = visibleReviews.map((r) => `
+      <article class="review-card reveal visible">
         <div class="review-head">
           <div class="review-meta">
             <strong>${displayInitials(r.name)}</strong>
@@ -167,21 +157,6 @@ function renderReviews(reviews) {
     qsa('.review-image', reviewGrid).forEach((img) => {
       img.addEventListener('click', () => openLightbox(img.dataset.image));
     });
-
-    const reviewToggle = qs('#reviewToggle');
-    const extraReviews = qsa('.review-extra', reviewGrid);
-    if (reviewToggle) {
-      if (!extraReviews.length) {
-        reviewToggle.hidden = true;
-      } else {
-        reviewToggle.hidden = false;
-        reviewToggle.addEventListener('click', () => {
-          const expanded = reviewGrid.classList.toggle('show-all-reviews');
-          reviewToggle.setAttribute('aria-expanded', String(expanded));
-          reviewToggle.textContent = expanded ? 'Daha az yorum göster' : 'Tüm yorumları gör';
-        });
-      }
-    }
   }
 }
 
@@ -347,22 +322,6 @@ if (successModal) {
 }
 
 if (orderForm) {
-  let initiateCheckoutSent = false;
-  const sendInitiateCheckout = () => {
-    if (initiateCheckoutSent) return;
-    initiateCheckoutSent = true;
-    const item = packages[selectedPackageKey];
-    if (typeof window.fbq === 'function' && item) {
-      window.fbq('track', 'InitiateCheckout', {
-        value: Number(item.total),
-        currency: 'TRY',
-        content_name: item.label,
-        content_type: 'product',
-        num_items: item.quantity
-      });
-    }
-  };
-  orderForm.addEventListener('focusin', sendInitiateCheckout, { once: true });
   orderForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     const addressField = qs('#addressField');
