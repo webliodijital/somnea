@@ -38,7 +38,7 @@ function syncPackage(key, scrollToOrder = false) {
     const active = card.dataset.package === key;
     card.classList.toggle('selected', active);
     const label = qs('.select-label', card);
-    if (label) label.textContent = active ? 'Seçili paket ✓' : 'Bu paketi seç';
+    if (label) label.textContent = active ? 'Seçili Paket ✓' : 'Sipariş Ver';
   });
 
   const summaryPackage = qs('#summaryPackage');
@@ -136,8 +136,7 @@ function renderReviews(reviews) {
   }
 
   if (reviewGrid) {
-    const visibleReviews = reviews.slice(0, 6);
-    reviewGrid.innerHTML = visibleReviews.map((r) => `
+    reviewGrid.innerHTML = reviews.map((r) => `
       <article class="review-card reveal visible">
         <div class="review-head">
           <div class="review-meta">
